@@ -16,42 +16,43 @@ By the end of this lesson, you will be able to:
 - make a simple line plot,
 - change an example to answer your own question.
 
-## 1. Install Python and the packages
+## 1. Create a Conda environment
 
-Install Python 3.9 or newer from [python.org](https://www.python.org/downloads/).
-Check that Python is available in a terminal:
-
-```bash
-python3 --version
-```
-
-Create an optional virtual environment in this lesson's folder:
+This lesson uses the same environment workflow introduced in the Conda
+tutorial. Open a terminal and create a named environment:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
+conda create -n scientific-basics python=3.11 numpy matplotlib
 ```
 
-On Windows PowerShell, activate it with:
-
-```powershell
-.venv\Scripts\Activate.ps1
-```
-
-Install the two packages used by the lesson:
+Activate it:
 
 ```bash
-python3 -m pip install numpy matplotlib
+conda activate scientific-basics
 ```
 
-If your computer uses `python` instead of `python3`, replace `python3` with
-`python` in the commands above.
+Check that the environment is active and the packages are available:
+
+```bash
+python --version
+python -c "import numpy, matplotlib; print('Packages are ready!')"
+```
+
+If your class uses Mamba, the equivalent commands are:
+
+```bash
+mamba create -n scientific-basics python=3.11 numpy matplotlib
+mamba activate scientific-basics
+```
+
+> Tip: Run `conda activate scientific-basics` whenever you return to this
+> lesson. Run `conda env list` if you want to see all your environments.
 
 ## 2. Run the lesson in VS Code
 
 1. Install the **Python** extension from Microsoft.
 2. Open `01_first_steps.py`.
-3. Select the Python interpreter where you installed NumPy and Matplotlib.
+3. Select the `scientific-basics` Conda environment as the Python interpreter.
 4. Run each cell from top to bottom using **Run Cell** or `Shift+Enter`.
 
 The file is an ordinary Python script. The `# %%` lines divide it into small
@@ -60,7 +61,8 @@ cells so beginners can run and inspect one idea at a time.
 You can also run the complete file from a terminal:
 
 ```bash
-python3 01_first_steps.py
+conda activate scientific-basics
+python 01_first_steps.py
 ```
 
 The final cell opens a plot window. Close the window to let a terminal run
@@ -108,8 +110,10 @@ the two versions.
 
 ## 5. Common beginner errors
 
-- **`ModuleNotFoundError: No module named 'numpy'`**: install the packages in
-  the same Python environment selected in VS Code.
+- **`ModuleNotFoundError: No module named 'numpy'`**: activate
+  `scientific-basics`, then select that same Conda environment in VS Code.
+- **`conda: command not found`**: install Miniconda or Anaconda, then open a
+  new terminal so Conda is added to your shell.
 - **The plot does not appear**: run the cells from top to bottom, or run the
   complete file from a terminal.
 - **`NameError`**: a cell that creates the missing variable has not run yet.
